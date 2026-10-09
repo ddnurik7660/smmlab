@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SMM LAB — Соцсети и контент</title>
+<meta name="description" content="SMM LAB: гайд по соцсетям, генератор идей, контент-планер и инструменты для тех, кто ведёт Instagram, TikTok, Telegram и YouTube.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#08070d" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f4fb" media="(prefers-color-scheme: light)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SMM LAB — Соцсети и контент">
+<meta property="og:description" content="Идеи, планер, тренды и инструменты для SMM в одном месте.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238b5cf6'/%3E%3Cstop offset='1' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='800' text-anchor='middle' fill='white'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Unbounded:wght@500;700;800&display=swap">
+<style>
+:root{--on:#fff;--hf:Unbounded,Manrope,sans-serif;--bg:#08070d;--card:#13111d;--fg:#f8f7fc;--muted:#9793a5;--p:#8b5cf6;--pink:#ec4899;--line:rgba(255,255,255,.1);--hd:rgba(8,7,13,.8);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6f4fb;--card:#fff;--fg:#17121f;--muted:#6b6678;--line:rgba(0,0,0,.1);--hd:rgba(246,244,251,.85)}}
+:root[data-theme="light"]{--bg:#f6f4fb;--card:#fff;--fg:#17121f;--muted:#6b6678;--line:rgba(0,0,0,.1);--hd:rgba(246,244,251,.85)}
+:root[data-theme="dark"]{--bg:#08070d;--card:#13111d;--fg:#f8f7fc;--muted:#9793a5;--line:rgba(255,255,255,.1);--hd:rgba(8,7,13,.8)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;overflow-x:hidden;transition:background .3s}
+a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit}
+.wrap{width:min(1100px,90%);margin:auto}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--p),var(--pink));z-index:200}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:100;background:var(--hd);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-weight:800;font-size:21px;letter-spacing:-1px}.logo span{color:var(--p);margin-left:3px}
+nav{display:flex;gap:26px}
+nav a{font-size:13px;color:var(--muted);position:relative;transition:.25s}
+nav a:hover,nav a.on{color:var(--fg)}
+nav a.on::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;background:var(--p);border-radius:4px;animation:grow .3s}
+@keyframes grow{from{transform:scaleX(0)}}
+.tools{display:flex;gap:8px;align-items:center}
+.ib{width:40px;height:40px;border:1px solid var(--line);border-radius:10px;background:transparent;cursor:pointer;transition:.25s}
+.ib:hover{background:var(--p);border-color:var(--p);color:var(--on)}
+#menu{display:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 20px;border-radius:10px;border:1px solid var(--line);background:transparent;font-size:13px;font-weight:700;cursor:pointer;transition:.3s}
+.btn.pr{background:var(--p);border-color:var(--p);color:var(--on);box-shadow:0 10px 30px color-mix(in srgb,var(--p) 30%,transparent)}
+.btn:hover{transform:translateY(-3px)}.btn:active{transform:scale(.97)}
+.btn.wh{background:#fff;color:#17121f;border-color:#fff}
+.page{display:none;min-height:80vh}.page.active{display:block;animation:pg .5s ease}
+@keyframes pg{from{opacity:0;transform:translateY(18px)}}
+.reveal{opacity:0}.page.active .reveal{animation:up .6s ease both;animation-delay:calc(var(--i,0)*60ms)}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1}}
+.eye{color:var(--p);font-size:11px;font-weight:800;letter-spacing:2.5px;display:flex;align-items:center;gap:10px}
+.eye::before{content:"";width:26px;height:1px;background:var(--p)}
+h1{font-size:clamp(42px,7vw,82px);line-height:1;letter-spacing:-4px;margin:22px 0}
+h2{font-size:clamp(30px,4vw,48px);line-height:1.05;letter-spacing:-2px}
+em{font-style:normal;color:var(--p)}
+.sub{color:var(--muted);max-width:580px}
+.hero{position:relative;padding:100px 0 80px;overflow:hidden}
+.orb{position:absolute;width:480px;height:480px;border-radius:50%;filter:blur(100px);opacity:.2;pointer-events:none;animation:drift 12s ease-in-out infinite alternate}
+.o1{top:-200px;right:-100px;background:var(--p)}.o2{bottom:-250px;left:-150px;background:var(--pink);animation-delay:-5s}
+@keyframes drift{to{transform:translate(-60px,50px) scale(1.15)}}
+.word{display:inline-block;background:linear-gradient(90deg,var(--fg),var(--p));-webkit-background-clip:text;background-clip:text;color:transparent;border-right:3px solid var(--p);animation:blink .8s step-end infinite}
+@keyframes blink{50%{border-color:transparent}}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.sect{padding:70px 0}
+.top{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:40px;flex-wrap:wrap}
+.top p{max-width:420px;color:var(--muted);font-size:14px}
+.grid{display:grid;gap:14px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{position:relative;padding:26px;border:1px solid var(--line);border-radius:18px;background:var(--card);transition:.35s;overflow:hidden}
+.card:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--p) 50%,transparent)}
+.card h3{font-size:20px;margin:30px 0 6px}.card p{color:var(--muted);font-size:13px}
+.num{color:var(--muted);font-size:11px}
+.stats{border-block:1px solid var(--line);padding:40px 0}
+.stats strong{display:block;font-size:44px;letter-spacing:-2px}.stats span{color:var(--muted);font-size:12px}
+.mq{overflow:hidden;white-space:nowrap;border-block:1px solid var(--line);padding:18px 0}
+.mq div{display:inline-block;animation:mq 22s linear infinite;font-weight:800;letter-spacing:3px;font-size:13px;color:var(--muted)}
+.mq b{color:var(--p);margin:0 22px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.cta{margin:40px 0 90px;padding:80px 30px;text-align:center;border-radius:24px;background:radial-gradient(circle at 50% 130%,#c026d3,transparent 45%),linear-gradient(135deg,#4c1d95,#7c3aed);color:#fff}
+.cta em{color:#e9d5ff}.cta p{margin:14px 0 26px;opacity:.85}
+/* tabs & chips */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.chip{padding:10px 18px;border:1px solid var(--line);border-radius:30px;background:transparent;font-size:13px;font-weight:600;cursor:pointer;transition:.25s}
+.chip:hover{border-color:var(--p)}.chip.on{background:var(--p);border-color:var(--p);color:var(--on)}
+.panel{padding:34px;border:1px solid var(--line);border-radius:20px;background:var(--card);animation:pg .4s}
+.panel h3{font-size:32px;letter-spacing:-1px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
+.tags span{padding:5px 10px;border:1px solid var(--line);border-radius:6px;font-size:11px;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.facts div{padding:14px;border-radius:12px;background:color-mix(in srgb,var(--p) 10%,transparent)}
+.facts small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px}
+/* idea cards */
+.idea{cursor:pointer;min-height:170px}
+.idea .star{position:absolute;top:18px;right:18px;font-size:18px;color:var(--muted);transition:.3s}
+.idea.fav{border-color:var(--p);background:color-mix(in srgb,var(--p) 12%,transparent)}.idea.fav .star{color:#fbbf24;transform:scale(1.3) rotate(72deg)}
+.idea h3{margin-top:26px;font-size:17px}
+.gen{margin-top:16px;padding:16px;border:1px dashed var(--p);border-radius:12px;min-height:56px;font-size:14px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+/* planner */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.day{padding:14px 8px;border:1px solid var(--line);border-radius:12px;background:var(--card);text-align:center;cursor:pointer;transition:.3s}
+.day:hover{border-color:var(--p);transform:translateY(-4px)}
+.day b{display:block;color:var(--p);font-size:11px}.day strong{display:block;font-size:13px;margin-top:6px}
+.day.pop{animation:pop .35s}@keyframes pop{50%{transform:scale(1.1)}}
+/* tools */
+.field{display:grid;gap:6px;margin-bottom:12px;font-size:12px;color:var(--muted)}
+input,select,textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);outline:none;transition:.25s}
+input:focus,select:focus,textarea:focus{border-color:var(--p);box-shadow:0 0 0 3px color-mix(in srgb,var(--p) 20%,transparent)}
+textarea{min-height:130px;resize:vertical}
+.meter{height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin:8px 0}
+.meter i{display:block;height:100%;width:0;background:var(--p);transition:width .3s,background .3s}
+.big{font-size:46px;font-weight:800;letter-spacing:-2px;color:var(--p)}
+/* list */
+.item{border-bottom:1px solid var(--line);padding:24px 0;cursor:pointer;transition:padding .3s}
+.item:hover{padding-left:12px}
+.item .hd{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.item h3{font-size:22px}.item small{color:var(--p);letter-spacing:2px;font-size:10px;font-weight:800}
+.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s}
+.more>div{overflow:hidden;color:var(--muted);font-size:14px}
+.item.open .more{grid-template-rows:1fr}.item.open .more>div{padding-top:10px}
+.pl{color:var(--p);font-size:24px;transition:.3s}.item.open .pl{transform:rotate(45deg)}
+.toast{position:fixed;left:50%;bottom:calc(30px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);padding:12px 22px;border-radius:30px;background:var(--p);color:var(--on);font-size:13px;font-weight:700;opacity:0;pointer-events:none;transition:.35s;z-index:300}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+#top{position:fixed;right:20px;bottom:calc(24px + env(safe-area-inset-bottom,0px));opacity:0;pointer-events:none;background:var(--p);color:var(--on);z-index:150}
+#top.show{opacity:1;pointer-events:auto}
+footer{padding:30px 0;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+footer nav{gap:18px}
+@media(max-width:900px){
+#menu{display:block}.go{display:none}
+nav{position:fixed;top:calc(70px + env(safe-area-inset-top,0px));left:0;right:0;flex-direction:column;gap:0;padding:10px 5%;background:var(--bg);border-bottom:1px solid var(--line);transform:translateY(-160%);transition:.35s;z-index:-1}
+nav.open{transform:none}nav a{padding:15px 0;border-bottom:1px solid var(--line)}nav a.on::after{display:none}
+footer nav{position:static;flex-direction:row;transform:none;padding:0;border:0;background:none}footer nav a{border:0;padding:0}
+.g3,.g4{grid-template-columns:1fr 1fr}.week{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:600px){.g2,.g3,.g4{grid-template-columns:1fr}.facts{grid-template-columns:1fr}.week{grid-template-columns:repeat(2,1fr)}h1{letter-spacing:-2px}.hero{padding-top:60px}.panel{padding:22px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1}}
+
+body[data-pg=social]{--p:#38bdf8;--pink:#6366f1}
+body[data-pg=content]{--p:#f472b6;--pink:#fb923c}
+body[data-pg=trends]{--p:#84cc16;--pink:#22d3ee;--on:#17121f}
+body[data-pg=tools]{--p:#f59e0b;--pink:#f43f5e;--on:#17121f}
+h1,h2,h3,.big,.stats strong,.logo{font-family:var(--hf)}
+h1{font-size:clamp(30px,4.8vw,60px);letter-spacing:-.04em;line-height:1.08}h2{letter-spacing:-.03em;font-weight:700}
+h3{font-weight:600}.card h3{font-size:16px}.item h3{font-size:18px}.panel h3{font-size:26px}.stats strong{font-size:38px}
+.card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--p) 24%,transparent),transparent 65%)}
+.card:hover::after{opacity:1}
+#homePlat .card:hover{border-color:var(--c)}#homePlat .card>div{color:var(--c)}
+#pPanel{border-top:3px solid var(--c,var(--p))}
+.hg{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}
+.phone{position:relative;justify-self:center;width:min(290px,100%);padding:16px;border:1px solid var(--line);border-radius:30px;background:var(--card);box-shadow:0 30px 80px color-mix(in srgb,var(--p) 35%,transparent);transform:rotate(4deg);animation:fl 6s ease-in-out infinite alternate}
+@keyframes fl{to{transform:rotate(-2deg) translateY(-14px)}}
+.ph-top{display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:12px}
+.av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pink))}
+.ph-img{aspect-ratio:1;border-radius:18px;background:linear-gradient(135deg,var(--p),var(--pink),#fb923c);background-size:200% 200%;animation:gs 6s linear infinite;display:grid;place-items:center;font-size:64px;color:#fff;cursor:pointer;user-select:none}
+@keyframes gs{50%{background-position:100% 100%}}
+.ph-act{display:flex;align-items:center;gap:10px;margin:12px 0 6px;font-weight:800}
+#heart{border:0;background:none;font-size:26px;cursor:pointer;color:var(--muted);transition:.25s}#heart.on{color:#f43f5e;transform:scale(1.2)}
+.phone p{font-size:13px;color:var(--muted)}.phone small{display:block;margin-top:10px;font-size:11px;color:var(--muted);opacity:.7}
+.fh{position:absolute;pointer-events:none;font-size:22px;color:#f43f5e;animation:fy 1s ease-out forwards}
+@keyframes fy{to{transform:translateY(-120px) scale(1.5);opacity:0}}
+.mq.r div{animation-direction:reverse;animation-duration:30s;font-family:var(--hf);font-size:26px;color:transparent;-webkit-text-stroke:1px var(--muted)}
+.qa{justify-content:flex-start;min-height:54px;text-align:left}
+@media(max-width:900px){.hg{grid-template-columns:1fr}.phone{display:none}}
+.nr{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}.nr:last-child{border:0}
+.nr b{min-width:90px}.nr span{color:var(--muted);font-size:12px;margin-left:auto;text-align:right}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--muted);opacity:.5;flex:none}
+.dot.on{background:#22c55e;opacity:1;box-shadow:0 0 0 4px rgba(34,197,94,.25);animation:pl 1.6s ease-in-out infinite}
+@keyframes pl{50%{box-shadow:0 0 0 8px rgba(34,197,94,0)}}
+
+/* TikTok-style page transition */
+main{position:relative}
+main.tt{overflow:hidden}
+.page.leaving{display:block;position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:1}
+.page.active.enter-up{animation:inUp .55s cubic-bezier(.22,.9,.25,1) both}
+.page.active.enter-down{animation:inDown .55s cubic-bezier(.22,.9,.25,1) both}
+.page.leaving .reveal{opacity:1;animation:none}
+.page.leaving.leave-up{animation:outUp .55s cubic-bezier(.22,.9,.25,1) both}
+.page.leaving.leave-down{animation:outDown .55s cubic-bezier(.22,.9,.25,1) both}
+@keyframes inUp{from{transform:translateY(100vh) scale(.94);opacity:.4;border-radius:28px}to{transform:none;opacity:1}}
+@keyframes inDown{from{transform:translateY(-100vh) scale(.94);opacity:.4;border-radius:28px}to{transform:none;opacity:1}}
+@keyframes outUp{to{transform:translateY(-35vh) scale(.9);opacity:0;filter:blur(6px)}}
+@keyframes outDown{to{transform:translateY(35vh) scale(.9);opacity:0;filter:blur(6px)}}
+#glitch{position:fixed;inset:0;z-index:150;pointer-events:none;opacity:0;mix-blend-mode:screen;
+background:linear-gradient(180deg,transparent 40%,rgba(34,211,238,.18) 48%,rgba(236,72,153,.18) 52%,transparent 60%)}
+#glitch.go{animation:gl .45s steps(6) both}
+@keyframes gl{0%{opacity:0;transform:translateY(-60%)}20%{opacity:1}60%{opacity:.8;transform:translateY(0) translateX(6px)}100%{opacity:0;transform:translateY(60%) translateX(-6px)}}
+body.swap header .logo{animation:logoRgb .45s steps(5)}
+@keyframes logoRgb{0%,100%{text-shadow:none}30%{text-shadow:3px 0 #22d3ee,-3px 0 #ec4899}60%{text-shadow:-3px 0 #22d3ee,3px 0 #ec4899}}
+@media(prefers-reduced-motion:reduce){.page.leaving{display:none}.page.active.enter-up,.page.active.enter-down{animation:pg .3s ease}#glitch{display:none}}
+
+/* INTRO */
+body.introing{overflow:hidden}
+body.introing *{animation-play-state:paused!important}
+body.introing #intro *,body.introing #intro *::before,body.introing #intro *::after{animation-play-state:running!important}
+#intro{position:fixed;inset:0;z-index:1000;background:#08070d;color:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;transition:transform .8s cubic-bezier(.77,0,.18,1),border-radius .8s;will-change:transform}
+#intro.out{transform:translateY(-100%);border-radius:0 0 50% 50%/0 0 12% 12%}
+.in-orb{position:absolute;width:60vmax;height:60vmax;border-radius:50%;filter:blur(110px);opacity:.35;animation:drift 6s ease-in-out infinite alternate}
+.in-orb.a{background:#8b5cf6;top:-30vmax;right:-20vmax}.in-orb.b{background:#ec4899;bottom:-35vmax;left:-25vmax;animation-delay:-3s}
+.in-bars{position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);left:5%;right:5%;display:flex;gap:6px;z-index:2}
+.in-bars i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.2);overflow:hidden}
+.in-bars i::after{content:"";display:block;height:100%;width:0;background:#fff}
+.in-bars i.run::after{animation:fill var(--d,.7s) linear forwards}.in-bars i.done::after{width:100%}
+@keyframes fill{to{width:100%}}
+.in-skip{position:absolute;top:calc(env(safe-area-inset-top,0px) + 34px);right:5%;z-index:2;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:99px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;backdrop-filter:blur(8px)}
+.in-stage{position:relative;text-align:center;z-index:2;padding:0 5%}
+.in-word,.in-logo{font-family:var(--hf);font-weight:800;letter-spacing:-.06em;line-height:1}
+.in-word{font-size:clamp(46px,13vw,150px);position:relative;display:inline-block;opacity:0}
+.in-word.pop{opacity:1;animation:wpop .7s cubic-bezier(.2,.9,.2,1) both}
+.in-word::before,.in-word::after{content:attr(data-t);position:absolute;left:0;top:0;width:100%;mix-blend-mode:screen}
+.in-word::before{color:#22d3ee;animation:gA .7s steps(7) both}.in-word::after{color:#ec4899;animation:gB .7s steps(7) both}
+@keyframes wpop{0%{transform:translateY(60px) scale(1.25);opacity:0;filter:blur(14px)}35%{opacity:1;filter:none}100%{transform:none;opacity:1}}
+@keyframes gA{0%{transform:translate(-14px,3px);clip-path:inset(10% 0 60% 0)}25%{transform:translate(10px,-4px);clip-path:inset(55% 0 10% 0)}50%{transform:translate(-6px,2px);clip-path:inset(30% 0 35% 0)}75%{transform:translate(4px,0);clip-path:inset(70% 0 5% 0)}100%{transform:translate(0);clip-path:inset(0 0 100% 0)}}
+@keyframes gB{0%{transform:translate(14px,-3px);clip-path:inset(60% 0 10% 0)}25%{transform:translate(-10px,4px);clip-path:inset(15% 0 55% 0)}50%{transform:translate(6px,-2px);clip-path:inset(40% 0 25% 0)}75%{transform:translate(-4px,0);clip-path:inset(5% 0 70% 0)}100%{transform:translate(0);clip-path:inset(100% 0 0 0)}}
+.in-logo{font-size:clamp(54px,15vw,170px);display:none}
+.in-logo span{background:linear-gradient(90deg,#8b5cf6,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent;margin-left:.06em}
+.in-logo.show{display:block;animation:lg .9s cubic-bezier(.2,.9,.2,1) both}
+@keyframes lg{from{transform:scale(.4) rotate(-6deg);opacity:0;filter:blur(18px)}60%{transform:scale(1.06) rotate(1deg);opacity:1;filter:none}to{transform:none;opacity:1}}
+.in-pill{display:none;margin:26px auto 0;width:max-content;max-width:100%;align-items:center;gap:10px;padding:10px 18px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);font-size:14px;font-weight:700}
+.in-pill.show{display:flex;animation:pill .6s .25s cubic-bezier(.2,.9,.2,1) both}
+.in-pill b{color:#ec4899;font-size:18px;animation:beat .6s ease-in-out infinite alternate}
+.in-pill span{font-variant-numeric:tabular-nums;min-width:4.2ch;text-align:right}
+@keyframes pill{from{transform:translateY(24px) scale(.8);opacity:0}to{transform:none;opacity:1}}
+@keyframes beat{to{transform:scale(1.35)}}
+.in-hearts{position:absolute;inset:0;pointer-events:none;z-index:1}
+.in-hearts .h{position:absolute;bottom:-40px;animation:hf var(--t,2.2s) ease-out forwards;will-change:transform}
+@keyframes hf{0%{transform:translate(0,0) scale(.4);opacity:0}15%{opacity:1}100%{transform:translate(var(--sx,0),-105vh) scale(1.1) rotate(var(--r,0deg));opacity:0}}
+@media(prefers-reduced-motion:reduce){#intro{display:none}}
+
+/* EXTRAS */
+html{overscroll-behavior-y:contain;touch-action:manipulation;scrollbar-width:thin;scrollbar-color:var(--p) transparent}
+::selection{background:var(--p);color:var(--on)}
+:focus-visible{outline:2px solid var(--p);outline-offset:3px;border-radius:6px}
+.skip{position:fixed;left:12px;top:-60px;z-index:2000;padding:10px 16px;border-radius:10px;background:var(--p);color:var(--on);border:0;font-weight:700;cursor:pointer;transition:top .25s}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+.dh{position:fixed;z-index:400;pointer-events:none;font-size:46px;line-height:1;margin:-23px 0 0 -23px;color:#f43f5e;filter:drop-shadow(0 6px 14px rgba(244,63,94,.5));animation:dh .9s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes dh{0%{transform:scale(0) rotate(var(--r,0deg));opacity:0}25%{transform:scale(1.25) rotate(var(--r,0deg));opacity:1}60%{transform:scale(1) rotate(var(--r,0deg));opacity:1}100%{transform:translateY(-90px) scale(1.3) rotate(var(--r,0deg));opacity:0}}
+.swipehint{display:none}
+.tabbar{display:none}
+@media(max-width:900px){
+.tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:160;justify-content:space-around;padding:10px 6px calc(8px + env(safe-area-inset-bottom,0px));background:var(--hd);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line)}
+.tabbar a{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;font-size:10px;font-weight:700;color:var(--muted);transition:color .25s}
+.tabbar svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s cubic-bezier(.2,.9,.2,1),stroke .25s}
+.tabbar a.on{color:var(--fg)}.tabbar a.on svg{stroke:var(--p);transform:translateY(-2px) scale(1.15)}
+.tabbar a.on::before{content:"";position:absolute;top:-11px;width:24px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--p),var(--pink))}
+.tabbar a:active svg{transform:scale(.85)}
+#menu{display:none!important}
+body{padding-bottom:70px}
+#top{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+.toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+.swipehint{display:block;text-align:center;color:var(--muted);font-size:11px;letter-spacing:1px;padding:0 0 26px;animation:sh 1.8s ease-in-out infinite alternate}
+@keyframes sh{to{transform:translateY(-6px);opacity:.5}}
+}
+</style>
+</head>
+<body>
+<button class="skip" type="button" onclick="document.getElementById('main').focus()">К содержимому</button>
+<div id="intro" aria-hidden="true">
+<div class="in-orb a"></div><div class="in-orb b"></div>
+<div class="in-bars"><i></i><i></i><i></i></div>
+<button class="in-skip" id="inSkip" type="button">Пропустить</button>
+<div class="in-hearts" id="inHearts"></div>
+<div class="in-stage"><div class="in-word" id="inWord"></div><div class="in-logo" id="inLogo">SMM<span>LAB</span></div><div class="in-pill" id="inPill"><b>❤</b><span id="inCnt">0</span> новых подписчиков</div></div>
+</div>
+<div id="bar"></div>
+<header><div class="wrap nav">
+<a href="#/home" class="logo">SMM<span>LAB</span></a>
+<nav id="nav">
+<a href="#/home" data-p="home">Главная</a><a href="#/social" data-p="social">Соцсети</a><a href="#/content" data-p="content">Контент</a><a href="#/trends" data-p="trends">Тренды</a><a href="#/tools" data-p="tools">Инструменты</a>
+</nav>
+<div class="tools"><button class="ib" id="theme" aria-label="Тема">◐</button><a href="#/content" class="btn pr go" style="min-height:40px">Начать →</a><button class="ib" id="menu" aria-label="Меню">☰</button></div>
+</div></header>
+
+<div id="glitch"></div>
+<main id="main" tabindex="-1" style="outline:none">
+<!-- HOME -->
+<section class="page" id="p-home">
+<div class="hero"><div class="orb o1"></div><div class="orb o2"></div><div class="wrap hg"><div>
+<div class="eye reveal">SOCIAL MEDIA LAB</div>
+<h1 class="reveal">Создавай<br><em>контент.</em><br>Расти как <span class="word" id="word"></span></h1>
+<p class="sub reveal">Разберись в соцсетях, собери контент-план, посчитай вовлечённость и превращай идеи в цифровой проект.</p>
+<div class="row reveal"><a class="btn pr" href="#/content">Изучить контент ↗</a><a class="btn" href="#/social">Исследовать соцсети</a><a class="btn" href="#/tools">Инструменты</a></div>
+</div><aside class="phone reveal"><div class="ph-top"><i class="av"></i><b>@smm.lab</b></div><div class="ph-img" id="phE" title="Нажми">✦</div><div class="ph-act"><button id="heart" aria-label="Лайк">♥</button><span id="likes">1 284</span></div><p id="phC">Как собрать контент-план за вечер</p><small>Нажми на картинку или сердце</small></aside></div></div>
+<div class="wrap" style="padding-top:50px"><div class="grid g2">
+<div class="card reveal"><p class="num">Прямо сейчас</p><h3 style="margin:10px 0 14px">Где сейчас лучшее время для поста</h3><div id="now"></div></div>
+<div class="card reveal" style="display:flex;flex-direction:column;justify-content:space-between;gap:18px"><div><p class="num">Совет дня</p><h3 id="tip" style="margin:10px 0;line-height:1.4;font-size:18px"></h3></div><div class="row" style="margin:0"><button class="btn pr" id="tipBtn">Другой совет</button><button class="btn" id="tipCopy">Копировать</button></div></div>
+</div></div>
+<div class="wrap stats"><div class="grid g4">
+<div class="reveal"><strong data-n="4">0</strong><span>платформы</span></div>
+<div class="reveal"><strong data-n="18">0</strong><span>идей контента</span></div>
+<div class="reveal"><strong data-n="5">0</strong><span>главных правил</span></div>
+<div class="reveal"><strong data-n="3">0</strong><span>инструмента</span></div></div></div>
+<div class="sect"><div class="wrap">
+<div class="top reveal"><div class="eye">ПЛАТФОРМЫ</div><h2 style="width:100%">Где живёт <em>твой контент?</em></h2></div>
+<div class="grid g4" id="homePlat"></div>
+</div></div>
+<div class="wrap"><div class="cta reveal"><h2>Идея — это <em>только начало.</em></h2><p>Выбери направление и начни уже сегодня.</p><a class="btn wh" href="#/content">Перейти к контенту ↗</a></div></div>
+</section>
+
+<!-- SOCIAL -->
+<section class="page" id="p-social"><div class="hero"><div class="orb o1"></div><div class="wrap">
+<div class="eye reveal">01 / SOCIAL NETWORKS</div>
+<h1 class="reveal">У каждой платформы <em>свой характер.</em></h1>
+<p class="sub reveal">Нажимай на вкладки и сравнивай форматы, аудиторию и лучшее время для публикаций.</p>
+<div class="tabs reveal" id="pTabs" style="margin-top:34px"></div>
+<div class="panel reveal" id="pPanel"></div>
+</div></div>
+<div class="sect"><div class="wrap"><div class="top reveal"><h2>Выбирай формат <em>под задачу.</em></h2>
+<div class="tabs" id="sortTabs"><button class="chip on" data-s="name">По названию</button><button class="chip" data-s="limit">По лимиту текста</button></div></div>
+<div class="grid g4" id="cmp"></div></div></div>
+</section>
+
+<!-- CONTENT -->
+<section class="page" id="p-content"><div class="hero"><div class="orb o1"></div><div class="wrap">
+<div class="eye reveal">02 / CONTENT</div>
+<h1 class="reveal">Контент, который <em>хочется смотреть.</em></h1>
+<p class="sub reveal">Фильтруй идеи, сохраняй понравившиеся ⭐ и генерируй случайную тему одним нажатием.</p>
+</div></div>
+<div class="sect" style="padding-top:0"><div class="wrap">
+<div class="tabs reveal" id="fTabs"></div>
+<div class="gen reveal"><span id="genText">Нажми «Сгенерировать» — получишь идею.</span><span class="row" style="margin:0"><button class="btn pr" id="genBtn">Сгенерировать ↗</button><button class="btn" id="copyGen">Копировать</button></span></div>
+<p class="reveal" style="margin:18px 0;color:var(--muted);font-size:13px">Сохранено: <b id="favCount" style="color:var(--p)">0</b> <button class="chip" id="favOnly" style="margin-left:10px;padding:6px 14px">Только сохранённые</button></p>
+<div class="grid g3" id="ideas"></div>
+</div></div>
+<div class="sect"><div class="wrap"><div class="top reveal"><h2>Контент-план <em>на неделю.</em></h2><p>Нажми на день, чтобы сменить формат. План сохраняется в браузере.</p></div>
+<div class="week reveal" id="week"></div>
+<div class="row reveal"><button class="btn pr" id="shuffle">Перемешать неделю</button><button class="btn" id="resetWeek">Сбросить</button></div></div></div>
+</section>
+
+<!-- TRENDS -->
+<section class="page" id="p-trends"><div class="hero"><div class="orb o1"></div><div class="wrap">
+<div class="eye reveal">03 / TRENDS & TIPS</div>
+<h1 class="reveal">Смотри шире. <em>Создавай новое.</em></h1>
+<p class="sub reveal">Нажми на тренд или вопрос, чтобы раскрыть подробности.</p>
+</div></div>
+<div class="wrap" id="trendList"></div>
+<div class="sect"><div class="wrap"><div class="top reveal"><h2>Пять принципов <em>хорошего контента.</em></h2></div><div class="grid g3" id="rules"></div></div></div>
+<div class="sect" style="padding-top:0"><div class="wrap" style="max-width:850px"><div class="top reveal"><h2>Частые <em>вопросы.</em></h2></div><div id="faq"></div></div></div>
+</section>
+
+<!-- TOOLS -->
+<section class="page" id="p-tools"><div class="hero"><div class="orb o1"></div><div class="wrap">
+<div class="eye reveal">04 / TOOLS</div>
+<h1 class="reveal">Мини-<em>инструменты.</em></h1>
+<p class="sub reveal">Всё работает прямо в браузере, без регистрации.</p>
+</div></div>
+<div class="wrap"><div class="grid g3" style="padding-bottom:40px">
+<div class="card reveal"><h3 style="margin-top:0">Счётчик символов</h3>
+<div class="field">Платформа<select id="cPlat"></select></div>
+<div class="field"><textarea id="cText" placeholder="Вставь текст поста…"></textarea></div>
+<div class="meter"><i id="cBar"></i></div><p id="cInfo">0 / 0</p></div>
+<div class="card reveal"><h3 style="margin-top:0">Вовлечённость (ER)</h3>
+<div class="field">Подписчики<input id="erF" type="number" min="0" placeholder="10000"></div>
+<div class="field">Лайки<input id="erL" type="number" min="0" placeholder="450"></div>
+<div class="field">Комментарии<input id="erC" type="number" min="0" placeholder="35"></div>
+<div class="big" id="erOut">0%</div><p id="erTxt" style="color:var(--muted);font-size:13px">Введи данные.</p></div>
+<div class="card reveal"><h3 style="margin-top:0">Генератор хэштегов</h3>
+<div class="field">Тема<input id="hTopic" placeholder="например: дизайн"></div>
+<button class="btn pr" id="hBtn" style="width:100%">Создать</button>
+<div class="tags" id="hOut" style="margin-top:16px"></div>
+<button class="btn" id="hCopy" style="width:100%">Копировать все</button></div>
+</div></div>
+<div class="wrap" style="padding-bottom:90px"><h2 class="reveal" style="margin-bottom:24px">Какой ты <em>автор?</em></h2><div class="panel reveal" id="quiz"></div></div>
+</section>
+<div class="swipehint" id="swipeHint">↑ свайпни вверх — следующая страница</div>
+</main>
+
+<footer><div class="wrap"><a href="#/home" class="logo">SMM<span>LAB</span></a>
+<nav><a href="#/social">Соцсети</a><a href="#/content">Контент</a><a href="#/trends">Тренды</a><a href="#/tools">Инструменты</a></nav><button class="btn" id="share" type="button" style="min-height:36px">Поделиться ↗</button><p>© 2026 SMM LAB</p></div></footer>
+<noscript><p style="text-align:center;padding:20px">Для работы сайта нужен JavaScript.</p></noscript>
+<div class="tabbar" role="navigation" aria-label="Основная навигация">
+<a href="#/home" data-t="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Главная</a>
+<a href="#/social" data-t="social"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Соцсети</a>
+<a href="#/content" data-t="content"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Контент</a>
+<a href="#/trends" data-t="trends"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>Тренды</a>
+<a href="#/tools" data-t="tools"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>Инструменты</a>
+</div>
+<button class="ib" id="top" aria-label="Наверх">↑</button>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1800)};
+const copy=async t=>{try{await navigator.clipboard.writeText(t);toast('Скопировано ✓')}catch(e){toast('Не удалось скопировать')}};
+const P={
+Instagram:{i:'◎',d:'Визуальная подача играет ключевую роль.',t:['Reels','Stories','Фото','Carousel'],f:'Визуал + личный бренд',time:'11:00–13:00, 19:00–21:00',aud:'18–34',lim:2200,fmt:'Reels / Stories'},
+TikTok:{i:'♪',d:'Короткие вертикальные видео, тренды и динамика.',t:['Short video','Trends','Music','Effects'],f:'Видео + развлечения',time:'18:00–22:00',aud:'16–30',lim:4000,fmt:'Short video'},
+Telegram:{i:'➤',d:'Среда для сообществ, экспертного контента и новостей.',t:['Каналы','Посты','Чаты','Stories'],f:'Сообщество + информация',time:'08:00–10:00, 20:00–22:00',aud:'20–45',lim:4096,fmt:'Посты'},
+YouTube:{i:'▶',d:'Большие истории, обучающие видео и Shorts.',t:['Видео','Shorts','Stream','Review'],f:'Видео + образование',time:'15:00–18:00',aud:'16–45',lim:5000,fmt:'Длинное видео'}};
+const PC={Instagram:'#ec4899',TikTok:'#22d3ee',Telegram:'#38bdf8',YouTube:'#ef4444'};
+const IDEAS=[['Мини-гайд','Полезный','Объясни сложную тему простыми шагами.'],['Чек-лист','Полезный','Собери короткий список действий по теме.'],['FAQ','Полезный','Ответь на самые частые вопросы аудитории.'],['До / после','Визуальный','Покажи результат работы в сравнении.'],['Карусель-подборка','Визуальный','5 слайдов: инструменты, приложения, идеи.'],['Закулисье','Визуальный','Покажи процесс создания продукта.'],['Мем-формат','Развлекательный','Адаптируй популярный мем под свою нишу.'],['История','Развлекательный','Расскажи реальную историю с выводом.'],['Ошибки новичка','Развлекательный','«3 ошибки, которые делают почти все».'],['Шаблон','Полезный','Дай готовый шаблон, который можно забрать и использовать.'],['Таймлапс','Визуальный','Ускоренно покажи путь от черновика к результату.'],['Челлендж','Развлекательный','Запусти 7-дневный мини-челлендж для подписчиков.'],['Миф или правда','Развлекательный','Разбери популярный миф в своей нише.'],['Q&A','Вовлекающий','Собери вопросы в Stories и ответь видео.'],['Битва мнений','Вовлекающий','Столкни два подхода и попроси проголосовать.'],['Опрос','Вовлекающий','Два противоположных варианта на выбор.'],['Вопрос дня','Вовлекающий','Спроси мнение и ответь на лучшие комментарии.'],['Мнение','Вовлекающий','Поделись взглядом на актуальную тему.']];
+const TRENDS=[['VIDEO','Короткие видео','Вертикальные ролики быстро доносят идею. Лучше всего работают сильный первый кадр (до 3 секунд) и понятный вывод.'],['AI','Искусственный интеллект','AI помогает искать идеи, делать черновики и ускорять рутину. Финальную редактуру и голос бренда оставляй за собой.'],['BRAND','Личный бренд','Людям интересен человек за продуктом. Делись опытом, ошибками и ценностями.'],['FORMAT','Серии и рубрики','Повторяемый формат формирует привычку: аудитория знает, чего ждать и когда.'],['SEARCH','Поиск внутри соцсетей','Люди ищут ответы прямо в TikTok и Instagram. Добавляй ключевые слова в подпись и в первые секунды видео.'],['COMMUNITY','Сообщества','Опросы, диалоги и ответы в комментариях превращают подписчиков в активное сообщество.']];
+const RULES=[['Знай аудиторию','Понимай, для кого ты создаёшь публикации.'],['Будь регулярным','Стабильность формирует привычку.'],['Цени визуал','Первое впечатление создаётся за секунды.'],['Общайся','Не превращай соцсети в одностороннее вещание.'],['Анализируй','Смотри на результаты и меняй подход.']];
+const FAQ=[['Сколько раз нужно публиковать?','Универсальной цифры нет. Выбери ритм, который можно держать без потери качества.'],['Нужно ли быть сразу везде?','Нет. Начни с одной платформы, пойми её формат и расширяйся постепенно.'],['Что делать, если закончились идеи?','Обратись к вопросам аудитории, старым постам и комментариям. Одна идея превращается в несколько материалов.'],['Нужно ли следовать каждому тренду?','Нет. Используй тренд, только если он подходит теме, аудитории и стилю.']];
+const FORMATS=['Полезный пост','Stories','Reels','Совет','Опрос','Видео','Анализ','Карусель','Закулисье','Прямой эфир'];
+const DAYS=['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС'],DEF=['Полезный пост','Stories','Reels','Совет','Опрос','Видео','Анализ'];
+
+/* router */
+const pages=['home','social','content','trends','tools'],titles={home:'Главная',social:'Соцсети',content:'Контент',trends:'Тренды',tools:'Инструменты'};
+let curP=null,ttT;
+function route(){let p=(location.hash.replace('#/','')||'home');if(!pages.includes(p))p='home';
+const prev=curP,main=$('main');
+if(prev&&prev!==p){const dir=pages.indexOf(p)>pages.indexOf(prev)?'up':'down';
+ const old=$('#p-'+prev);clearTimeout(ttT);
+ $$('.page.leaving').forEach(s=>s.classList.remove('leaving','leave-up','leave-down'));
+ $$('.page').forEach(s=>s.classList.remove('enter-up','enter-down'));
+ old.classList.add('leaving','leave-'+dir);
+ main.classList.add('tt');
+ const g=$('#glitch');g.classList.remove('go');void g.offsetWidth;g.classList.add('go');
+ document.body.classList.add('swap');
+ requestAnimationFrame(()=>$('#p-'+p).classList.add('enter-'+dir));
+ ttT=setTimeout(()=>{old.classList.remove('leaving','leave-up','leave-down');$('#p-'+p).classList.remove('enter-up','enter-down');main.classList.remove('tt');document.body.classList.remove('swap')},600)}
+curP=p;
+$$('.page').forEach(s=>s.classList.toggle('active',s.id==='p-'+p));
+$$('nav a[data-p]').forEach(a=>a.classList.toggle('on',a.dataset.p===p));
+$$('.page.active .reveal').forEach((e,i)=>e.style.setProperty('--i',Math.min(i,14)));
+document.body.dataset.pg=p;document.title=titles[p]+' — SMM LAB';$('#nav').classList.remove('open');window.scrollTo(0,0);
+if(p==='home')counters()}
+addEventListener('hashchange',route);
+
+/* header */
+$('#menu').onclick=()=>$('#nav').classList.toggle('open');
+$('#theme').onclick=()=>{const r=document.documentElement,dark=getComputedStyle(r).getPropertyValue('--bg').trim()==='#08070d';r.dataset.theme=dark?'light':'dark';store.set('theme',r.dataset.theme)};
+const th=store.get('theme',null);if(th)document.documentElement.dataset.theme=th;
+$('#top').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+addEventListener('scroll',()=>{const h=document.documentElement,s=h.scrollTop,m=h.scrollHeight-h.clientHeight;$('#bar').style.width=(m>0?s/m*100:0)+'%';$('#top').classList.toggle('show',s>500)},{passive:true});
+
+/* home */
+function counters(){$$('[data-n]').forEach(c=>{const n=+c.dataset.n,t0=performance.now();(function u(now){const p=Math.min((now-t0)/1100,1);c.textContent=Math.round(n*(1-Math.pow(1-p,3)))+(p>=1?'+':'');if(p<1)requestAnimationFrame(u)})(t0)})}
+const words=['создатель','бренд','эксперт','автор'];let wi=0,ci=0,del=false;
+(function type(){const w=words[wi],el=$('#word');if(!del){el.textContent=w.slice(0,++ci);if(ci===w.length){del=true;return setTimeout(type,1400)}}else{el.textContent=w.slice(0,--ci);if(!ci){del=false;wi=(wi+1)%words.length}}setTimeout(type,del?50:100)})();
+$('#homePlat').innerHTML=Object.entries(P).map(([n,p],i)=>`<a href="#/social" data-pl="${n}" class="card reveal" style="--c:${PC[n]}"><span class="num">0${i+1}</span><div style="font-size:30px;margin-top:10px">${p.i}</div><h3>${n}</h3><p>${p.fmt}</p></a>`).join('');
+$$('#homePlat a').forEach(a=>a.addEventListener('click',()=>store.set('plat',a.dataset.pl)));
+
+/* social */
+let cur=store.get('plat','Instagram');if(!P[cur])cur='Instagram';
+function drawPlat(){$('#pTabs').innerHTML=Object.keys(P).map(n=>`<button class="chip ${n===cur?'on':''}" data-n="${n}">${P[n].i} ${n}</button>`).join('');
+const p=P[cur];$('#pPanel').style.setProperty('--c',PC[cur]);$('#pPanel').innerHTML=`<h3>${cur}</h3><p class="sub" style="margin-top:6px">${p.d}</p><div class="tags">${p.t.map(t=>`<span>${t}</span>`).join('')}</div><div class="facts"><div><small>Фокус</small>${p.f}</div><div><small>Лучшее время</small>${p.time}</div><div><small>Аудитория</small>${p.aud} лет</div></div>`;
+$$('#pTabs .chip').forEach(b=>b.onclick=()=>{cur=b.dataset.n;store.set('plat',cur);drawPlat()})}
+location.hash===''||drawPlat();drawPlat();
+$('#pTabs').addEventListener('click',()=>{});
+addEventListener('hashchange',()=>{cur=store.get('plat',cur);drawPlat()});
+let sort='name';
+function drawCmp(){const e=Object.entries(P).sort((a,b)=>sort==='limit'?b[1].lim-a[1].lim:a[0].localeCompare(b[0]));
+$('#cmp').innerHTML=e.map(([n,p])=>`<div class="card"><h3 style="margin-top:0">${p.i} ${n}</h3><p>${p.fmt}</p><p style="margin-top:8px"><b style="color:var(--p)">${p.lim}</b> символов</p></div>`).join('')}
+$$('#sortTabs .chip').forEach(b=>b.onclick=()=>{sort=b.dataset.s;$$('#sortTabs .chip').forEach(x=>x.classList.toggle('on',x===b));drawCmp()});drawCmp();
+
+/* content */
+const types=['Все',...new Set(IDEAS.map(i=>i[1]))];let filt='Все',favs=new Set(store.get('favs',[])),favOnly=false;
+function drawIdeas(){$('#fTabs').innerHTML=types.map(t=>`<button class="chip ${t===filt?'on':''}" data-t="${t}">${t}</button>`).join('');
+$$('#fTabs .chip').forEach(b=>b.onclick=()=>{filt=b.dataset.t;drawIdeas()});
+const list=IDEAS.filter(i=>(filt==='Все'||i[1]===filt)&&(!favOnly||favs.has(i[0])));
+$('#ideas').innerHTML=list.length?list.map((i,k)=>`<div class="card idea ${favs.has(i[0])?'fav':''}" data-k="${i[0]}" style="animation:up .4s ${k*40}ms both"><span class="star">★</span><span class="num">${i[1]}</span><h3>${i[0]}</h3><p>${i[2]}</p></div>`).join(''):'<p style="color:var(--muted)">Пока пусто — сохрани идею звёздочкой.</p>';
+$$('.idea').forEach(c=>c.onclick=()=>{const k=c.dataset.k;favs.has(k)?favs.delete(k):favs.add(k);store.set('favs',[...favs]);drawIdeas()});
+$('#favCount').textContent=favs.size;$('#favOnly').classList.toggle('on',favOnly)}
+$('#favOnly').onclick=()=>{favOnly=!favOnly;drawIdeas()};drawIdeas();
+$('#genBtn').onclick=()=>{const pool=IDEAS.filter(i=>filt==='Все'||i[1]===filt),i=pool[Math.floor(Math.random()*pool.length)],t=$('#genText');t.style.opacity=0;setTimeout(()=>{t.textContent=i[0]+' — '+i[2];t.style.opacity=1},200)};
+$('#genText').style.transition='opacity .25s';
+$('#copyGen').onclick=()=>copy($('#genText').textContent);
+let week=store.get('week',DEF);if(!Array.isArray(week)||week.length!==7)week=[...DEF];
+const today=(new Date().getDay()+6)%7;
+function drawWeek(){$('#week').innerHTML=week.map((f,i)=>`<div class="day" data-i="${i}" style="${i===today?'border-color:var(--p);background:color-mix(in srgb,var(--p) 15%,transparent)':''}"><b>${DAYS[i]}</b><strong>${f}</strong></div>`).join('');
+$$('.day').forEach(d=>d.onclick=()=>{const i=+d.dataset.i;week[i]=FORMATS[(FORMATS.indexOf(week[i])+1)%FORMATS.length];store.set('week',week);drawWeek();$$('.day')[i].classList.add('pop')})}
+drawWeek();
+$('#shuffle').onclick=()=>{week=week.map(()=>FORMATS[Math.floor(Math.random()*FORMATS.length)]);store.set('week',week);drawWeek();toast('Неделя обновлена')};
+$('#resetWeek').onclick=()=>{week=[...DEF];store.set('week',week);drawWeek();toast('План сброшен')};
+
+/* trends */
+$('#trendList').innerHTML=TRENDS.map((t,i)=>`<div class="item reveal"><div class="hd"><div><small>${t[0]}</small><h3>0${i+1} · ${t[1]}</h3></div><span class="pl">+</span></div><div class="more"><div>${t[2]}</div></div></div>`).join('');
+$('#rules').innerHTML=RULES.map((r,i)=>`<div class="card reveal"><span class="num">0${i+1}</span><h3>${r[0]}</h3><p>${r[1]}</p></div>`).join('');
+$('#faq').innerHTML=FAQ.map(f=>`<div class="item reveal"><div class="hd"><h3 style="font-size:16px">${f[0]}</h3><span class="pl">+</span></div><div class="more"><div>${f[1]}</div></div></div>`).join('');
+$$('.item').forEach(it=>it.onclick=()=>{const box=it.parentElement,was=it.classList.contains('open');if(box.id==='faq')$$('.item',box).forEach(x=>x.classList.remove('open'));it.classList.toggle('open',!was)});
+
+/* tools */
+$('#cPlat').innerHTML=Object.entries(P).map(([n,p])=>`<option value="${p.lim}">${n} (${p.lim})</option>`).join('');
+function count(){const l=+$('#cPlat').value,n=$('#cText').value.length,pc=Math.min(n/l*100,100);$('#cBar').style.width=pc+'%';$('#cBar').style.background=n>l?'#ef4444':pc>85?'#f59e0b':'var(--p)';$('#cInfo').textContent=n+' / '+l+(n>l?' — превышен лимит':'')}
+$('#cText').oninput=count;$('#cPlat').onchange=count;
+function er(){const f=+$('#erF').value,l=+$('#erL').value,c=+$('#erC').value;if(!f){$('#erOut').textContent='0%';$('#erTxt').textContent='Введи данные.';return}const v=(l+c)/f*100;$('#erOut').textContent=v.toFixed(2)+'%';$('#erTxt').textContent=v<1?'Низкая вовлечённость: пробуй вопросы и опросы.':v<3?'Средний уровень — нормально для большинства аккаунтов.':v<6?'Хороший результат!':'Отличная вовлечённость 🔥'}
+['erF','erL','erC'].forEach(i=>$('#'+i).oninput=er);
+$('#hBtn').onclick=()=>{const t=$('#hTopic').value.trim().toLowerCase().replace(/[^\p{L}\p{N}]+/gu,'');if(!t)return toast('Введи тему');
+const s=['',  'smm','tips','daily','ideas','lab','school','pro'],tags=['#'+t,...s.slice(1).map(x=>'#'+t+x),'#контент','#соцсети','#smm'];
+$('#hOut').innerHTML=tags.map((x,i)=>`<span style="animation:up .3s ${i*40}ms both">${x}</span>`).join('')};
+$('#hCopy').onclick=()=>{const t=$$('#hOut span').map(s=>s.textContent).join(' ');t?copy(t):toast('Сначала создай хэштеги')};
+
+/* extras */
+document.addEventListener('pointermove',e=>{const c=e.target.closest&&e.target.closest('.card');if(c){const r=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-r.left+'px');c.style.setProperty('--my',e.clientY-r.top+'px')}});
+const ph=['✦','♪','▶','◎'],cap=['Как собрать контент-план за вечер','3 ошибки в первых кадрах','Шаблон Stories на неделю','Что публиковать в понедельник'];let pi=0,lk=1284;
+const showL=()=>$('#likes').textContent=lk.toLocaleString('ru');
+function burst(){const f=document.createElement('span');f.className='fh';f.textContent='♥';f.style.left=(20+Math.random()*60)+'%';f.style.top='55%';$('.phone').appendChild(f);setTimeout(()=>f.remove(),1000)}
+$('#heart').onclick=()=>{const h=$('#heart'),on=h.classList.toggle('on');lk+=on?1:-1;showL();if(on)burst()};
+$('#phE').onclick=()=>{pi=(pi+1)%4;$('#phE').textContent=ph[pi];$('#phC').textContent=cap[pi];lk+=Math.floor(Math.random()*40);showL();burst()};
+setInterval(()=>{lk+=Math.floor(Math.random()*4);showL()},2200);
+const QZ=[['Ты открываешь телефон. Первым делом…',['Снимаю ролик','Пишу мысль','Отвечаю людям','Листаю референсы']],['Идеальный вечер в сети — это…',['Монтаж','Лонгрид','Эфир с подписчиками','Новый визуал']],['Тебя чаще хвалят за…',['Динамику','Слова','Тепло','Вкус']],['Главная цель аккаунта',['Охваты','Экспертность','Сообщество','Красота']]];
+const QR=[['Видеомейкер','Твоя платформа — TikTok и YouTube Shorts. Делай сильный первый кадр и серии коротких роликов.'],['Эксперт-автор','Тебе подойдёт Telegram. Пиши разборы и гайды, держи регулярный ритм.'],['Комьюнити-лидер','Твоя сила — диалог. Запускай опросы, эфиры и чаты, отвечай каждому.'],['Визуальный дизайнер','Instagram — твой дом. Продумай сетку, карусели и единый стиль.']];
+let qs=0,qa=[0,0,0,0];
+function drawQ(){const q=$('#quiz');if(qs>=QZ.length){const r=QR[qa.indexOf(Math.max(...qa))];q.innerHTML=`<p class="num">Твой результат</p><h3 style="margin:8px 0">${r[0]}</h3><p class="sub" style="margin-bottom:20px">${r[1]}</p><button class="btn pr" id="qr">Пройти ещё раз</button>`;$('#qr').onclick=()=>{qs=0;qa=[0,0,0,0];drawQ()};return}
+q.innerHTML=`<div class="meter"><i style="width:${qs/QZ.length*100}%"></i></div><h3 style="font-size:20px;margin:14px 0 18px">${QZ[qs][0]}</h3><div class="grid g2">${QZ[qs][1].map((o,i)=>`<button class="btn qa" data-i="${i}">${o}</button>`).join('')}</div>`;
+$$('#quiz [data-i]').forEach(b=>b.onclick=()=>{qa[+b.dataset.i]++;qs++;drawQ()})}
+drawQ();
+function drawNow(){const h=new Date().getHours();$('#now').innerHTML=Object.entries(P).map(([n,p])=>{const on=[...p.time.matchAll(/(\d+):00–(\d+):00/g)].some(m=>h>=+m[1]&&h<+m[2]);return `<div class="nr"><i class="dot ${on?'on':''}"></i><b>${n}</b><span>${on?'сейчас активное окно':'окна: '+p.time}</span></div>`}).join('')}
+drawNow();setInterval(drawNow,60000);
+const TIPS=['Первые 3 секунды видео решают, досмотрят ли его до конца.','Одну идею превращай в пост, ролик и Stories — так проще держать ритм.','Заканчивай пост вопросом: комментарии растут быстрее.','Отвечай на комментарии в первый час — алгоритмы это любят.','Пиши так, будто объясняешь другу, а не выступаешь на сцене.','Смотри на сохранения и пересылки, а не только на лайки.','Один и тот же шрифт и цвета делают аккаунт узнаваемым.','Лучшая идея для поста часто лежит в вопросах подписчиков.'];let ti=Math.floor(Math.random()*TIPS.length);
+const showT=()=>{$('#tip').textContent=TIPS[ti]};showT();
+$('#tipBtn').onclick=()=>{ti=(ti+1+Math.floor(Math.random()*(TIPS.length-1)))%TIPS.length;showT()};
+$('#tipCopy').onclick=()=>copy(TIPS[ti]);
+route();
+
+/* intro */
+(function(){
+const el=$('#intro');if(!el)return;
+let seen=false;try{seen=sessionStorage.getItem('intro')==='1'}catch(e){}
+if(seen||matchMedia('(prefers-reduced-motion:reduce)').matches){el.remove();return}
+try{sessionStorage.setItem('intro','1')}catch(e){}
+document.body.classList.add('introing');
+const W=['Соцсети','Контент','Тренды'],D=700,bars=$$('.in-bars i',el),word=$('#inWord'),logo=$('#inLogo'),pill=$('#inPill'),hearts=$('#inHearts');
+const T=[];let hi,done=false;
+const later=(f,t)=>T.push(setTimeout(f,t));
+function heart(){const h=document.createElement('span');h.className='h';h.textContent='❤';
+const c=['#ec4899','#8b5cf6','#22d3ee','#f472b6'][Math.random()*4|0];
+h.style.cssText='left:'+(8+Math.random()*84)+'%;font-size:'+(18+Math.random()*22)+'px;color:'+c+';--t:'+(1.8+Math.random()*1.2)+'s;--sx:'+((Math.random()-.5)*120)+'px;--r:'+((Math.random()-.5)*50)+'deg';
+h.onanimationend=()=>h.remove();hearts.appendChild(h)}
+function slide(n){bars.forEach((b,i)=>{b.classList.toggle('done',i<n);b.classList.remove('run');b.style.setProperty('--d',D+'ms')});
+void word.offsetWidth;bars[n].classList.add('run');
+word.classList.remove('pop');void word.offsetWidth;word.textContent=W[n];word.dataset.t=W[n];word.classList.add('pop');
+for(let i=0;i<3;i++)heart()}
+function finale(){bars.forEach(b=>{b.classList.remove('run');b.classList.add('done')});
+word.style.display='none';logo.classList.add('show');pill.classList.add('show');
+hi=setInterval(heart,70);for(let i=0;i<10;i++)heart();
+const t0=performance.now(),N=12480;(function u(now){const p=Math.min((now-t0)/1100,1);$('#inCnt').textContent=Math.round(N*(1-Math.pow(1-p,3))).toLocaleString('ru');if(p<1&&!done)requestAnimationFrame(u)})(t0);
+later(()=>clearInterval(hi),1100);later(finish,1500)}
+function finish(){if(done)return;done=true;T.forEach(clearTimeout);clearInterval(hi);
+el.classList.add('out');document.body.classList.remove('introing');
+const h=location.hash.replace('#/','')||'home';if(h==='home')counters();
+setTimeout(()=>el.remove(),900)}
+el.addEventListener('click',finish);
+W.forEach((_,i)=>later(()=>slide(i),250+i*D));
+later(finale,250+W.length*D);
+})();
+
+/* extras */
+(function(){
+const tabs=$$('.tabbar a'),idx=()=>pages.indexOf(curP||'home');
+const go=d=>{const i=idx()+d;if(i<0||i>=pages.length)return false;location.hash='#/'+pages[i];return true};
+const sync=()=>{const p=location.hash.replace('#/','')||'home';
+tabs.forEach(a=>{const on=a.dataset.t===p;a.classList.toggle('on',on);on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
+$$('nav a[data-p]').forEach(a=>a.dataset.p===p?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+const h=$('#swipeHint');if(h)h.style.display=pages.indexOf(p)===pages.length-1?'none':''};
+addEventListener('hashchange',sync);sync();
+
+/* keyboard: ← → and 1-5 */
+addEventListener('keydown',e=>{
+if(e.altKey||e.ctrlKey||e.metaKey||document.body.classList.contains('introing'))return;
+if(e.target.closest&&e.target.closest('input,textarea,select,[contenteditable]'))return;
+if(e.key==='ArrowRight')go(1);else if(e.key==='ArrowLeft')go(-1);
+else if(/^[1-5]$/.test(e.key))location.hash='#/'+pages[+e.key-1]});
+
+/* TikTok-style feed swipe: at the end of a page swipe up -> next, at the top swipe down -> previous */
+let sy=0,sx=0,ok=false,atTop=false,atBot=false;
+addEventListener('touchstart',e=>{
+if(e.touches.length!==1||document.body.classList.contains('introing')){ok=false;return}
+ok=!e.target.closest('input,textarea,select,.week,.tabs,.mq,.tabbar');
+sy=e.touches[0].clientY;sx=e.touches[0].clientX;
+const d=document.documentElement;atTop=scrollY<=2;atBot=scrollY+innerHeight>=d.scrollHeight-2},{passive:true});
+addEventListener('touchend',e=>{
+if(!ok)return;const t=e.changedTouches[0],dy=t.clientY-sy,dx=t.clientX-sx;
+if(Math.abs(dx)>60)return;
+if(dy<-110&&atBot)go(1);else if(dy>110&&atTop)go(-1)},{passive:true});
+
+/* double tap / double click = floating heart */
+addEventListener('dblclick',e=>{
+if(e.target.closest('input,textarea,select,button,a,.chip,#intro,.tabbar'))return;
+const h=document.createElement('div');h.className='dh';h.textContent='❤';
+h.style.left=e.clientX+'px';h.style.top=e.clientY+'px';h.style.setProperty('--r',((Math.random()-.5)*36)+'deg');
+h.onanimationend=()=>h.remove();document.body.appendChild(h)});
+
+/* share */
+$('#share').onclick=async()=>{const d={title:document.title,text:'SMM LAB — соцсети и контент',url:location.href};
+try{if(navigator.share){await navigator.share(d)}else{await copy(d.url)}}catch(e){if(e&&e.name!=='AbortError')copy(d.url)}};
+
+/* tab title when user leaves */
+const hidden='💜 Вернись в SMM LAB';
+document.addEventListener('visibilitychange',()=>{
+document.title=document.hidden?hidden:titles[curP||'home']+' — SMM LAB'});
+})();
+</script>
+</body>
+</html>
